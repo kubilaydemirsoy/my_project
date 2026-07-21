@@ -14,7 +14,6 @@ Takım Sentio
 | MEHMET CAN GÜLSEROĞLU | Team Member / Developer | `mcagul99` (U0A3B384YVC) | Pasif |
 | ZEHRA CEREN ENGIN | Team Member / Developer | `zcerenengin` (U0A3B33DC6A) | Pasif |
 
-> **Not:** Sprint 2 boyunca takımın aktif katılım gösteren tek üyesi Kubilay Demirsoy olmuştur. Diğer üyeler Daily Scrum kanalına düzenli katılım sağlamamış, atanan task'ler devralınmamıştır. Bu durum Sprint Retrospective'de kayıt altına alınmış ve eğitim koordinasyonuna bildirilmiştir. Sprint hedefleri, kapsam daraltılmadan tek geliştirici tarafından tamamlanmıştır.
 
 ## Ürün İsmi
 
