@@ -59,7 +59,8 @@ Takım Sentio
   <details>
   <summary><b>Sprint 2 Daily Scrum özeti </b> (açmak için tıklayın)</summary>
 
-  
+  <img width="2576" height="2180" alt="sprint2_board" src="https://github.com/user-attachments/assets/e34f5c5d-c4b6-4197-b3a6-b080ab91d30b" />
+
 
   | Gün | Dün ne yapıldı | Bugün ne yapılacak | Engel |
   |---|---|---|---|
