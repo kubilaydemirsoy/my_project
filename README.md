@@ -100,7 +100,6 @@ Takım Sentio
   'love' pozitifte: 844 | negatifte: 35
   ```
 
-  ![En pozitif ve en negatif kelimeler]
 
   <img width="1183" height="484" alt="En pozitif en negatif kelimeler" src="https://github.com/user-attachments/assets/f91f0de6-9237-4c89-ace8-025d3454a54b" />
 
@@ -109,7 +108,8 @@ Takım Sentio
 
   ### 2. Baseline — LR + poz/neg frekans (2 boyutlu temsil)
 
-  ![Baseline karışıklık matrisi ve ROC](ProjectManagement/Sprint2Documents/baseline_confusion_roc.jpeg)
+  <img width="903" height="384" alt="LR + poz neg frekans" src="https://github.com/user-attachments/assets/f517287c-2dcd-4ad7-9b99-961aff0f5ab5" />
+
 
   Tüm tweet'i iki sayıya sıkıştıran temsil, 2.374 örnekte **502 hata** yaptı (215 yanlış pozitif, 287 yanlış negatif). AUC 0.86. Sonraki modellerin karşılaştırılacağı referans noktası olarak kaydedildi.
 
