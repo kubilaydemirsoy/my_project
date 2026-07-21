@@ -100,7 +100,10 @@ Takım Sentio
   'love' pozitifte: 844 | negatifte: 35
   ```
 
-  ![En pozitif ve en negatif kelimeler](<img width="1183" height="484" alt="En pozitif en negatif kelimeler" src="https://github.com/user-attachments/assets/7a0725de-493e-4557-a726-2cd12a9885eb" />)
+  ![En pozitif ve en negatif kelimeler]
+
+  <img width="1183" height="484" alt="En pozitif en negatif kelimeler" src="https://github.com/user-attachments/assets/f91f0de6-9237-4c89-ace8-025d3454a54b" />
+
 
   Log-oran sıralaması beklendiği gibi çıktı: pozitif tarafta *awesome, happy, amaze, welcome, thanks*; negatif tarafta *sad, hate, suck, hurt, bore*. Veri setinin tutarlı etiketlendiğinin ilk göstergesi oldu.
 
