@@ -59,21 +59,17 @@ Takım Sentio
   <details>
   <summary><b>Sprint 2 Daily Scrum özeti </b> (açmak için tıklayın)</summary>
 
-  <img width="2322" height="1626" alt="sprint2_board" src="https://github.com/user-attachments/assets/5dc8449c-4cd4-4715-8f2e-c3c1c3504b7d" />
-
+  
 
   | Gün | Dün ne yapıldı | Bugün ne yapılacak | Engel |
   |---|---|---|---|
-  | 1 | Sprint 1 kapanışı | Sprint planlama, story'lerin task'lere bölünmesi, metin temsili yöntemlerinin araştırılması | — |
-  | 2 | Sprint planlama tamamlandı | `build_freqs()` ve `tweet_to_freq()` fonksiyonlarının yazılması | — |
-  | 3 | Frekans sözlüğü çıkarıldı (17.919 kelime-sınıf çifti) | Baseline modelin eğitilmesi | — |
-  | 4 | Baseline eğitildi, 0.789 accuracy | Ortak `evaluate()` fonksiyonunun yazılması | 🚧 Baseline beklenenden düşük çıktı. İki özelliğe sıkıştırılmış temsilden fazlası beklenmemeli sonucuna varıldı, referans olarak kabul edildi. |
-  | 5 | `evaluate()` tamamlandı | CountVectorizer / TfidfVectorizer kurulumu | 🚧 Vektörleştirici tüm veriye fit ediliyordu — veri sızıntısı tespit edildi. |
-  | 6 | Sızıntı `Pipeline` ile giderildi, sonuçlar yeniden ölçüldü | LR + BoW ve LR + TF-IDF eğitimi, karakter n-gram eklenmesi | — |
-  | 7 | İki model de ~0.907 accuracy verdi | LinearSVC ve ComplementNB eklenmesi | 🚧 LinearSVC `predict_proba` desteklemiyor, ROC-AUC hesaplanamıyor. `CalibratedClassifierCV` ile sarmalanarak çözüldü. |
-  | 8 | Dört klasik model karşılaştırıldı | LightGBM entegrasyonu | 🚧 Seyrek matris ağaç modeline uygun değil; TruncatedSVD ile 300 boyuta indirildi. Eğitim tahmin edilenin iki katı sürdü. |
-  | 9 | LightGBM sonuçlandı, en zayıf ikinci model | RandomizedSearchCV ile hiperparametre araması | 🚧 Arama ~15 dk sürdü, Colab oturumunun düşmemesi için gözlem altında tutuldu. |
-  | 10 | Arama tamamlandı | Sonuçların tabloya dökülmesi, Sprint Review hazırlığı | 🚧 Aramanın elle seçilen parametrelerin gerisinde kalması — Review'a gündem olarak taşındı. |
+  | 1 (Pzt) | Sprint 1 kapanışı | Sprint planlama, story'lerin task'lere bölünmesi, `build_freqs()` ve `tweet_to_freq()` fonksiyonlarının yazılması | — |
+  | 2 (Sal) | Frekans sözlüğü çıkarıldı (17.919 kelime-sınıf çifti) | Baseline modelin eğitilmesi, ortak `evaluate()` fonksiyonunun yazılması | 🚧 Baseline 0.789 ile beklenenden düşük çıktı. İki özelliğe sıkıştırılmış temsilden fazlası beklenmemeli sonucuna varıldı, referans olarak kabul edildi. |
+  | 3 (Çar) | `evaluate()` tamamlandı, baseline referansı kaydedildi | CountVectorizer / TfidfVectorizer kurulumu, ilk deneme eğitimleri | 🚧 Vektörleştirici tüm veriye fit ediliyordu — veri sızıntısı tespit edildi, `Pipeline`'a geçildi ve sonuçlar yeniden ölçüldü. |
+  | 4 (Per) | LR + BoW ve LR + TF-IDF eğitildi, ikisi de ~0.907 accuracy verdi | LinearSVC, ComplementNB ve LightGBM entegrasyonu | 🚧 LinearSVC `predict_proba` desteklemiyor, ROC-AUC hesaplanamıyor → `CalibratedClassifierCV` ile çözüldü. LightGBM için seyrek matris TruncatedSVD ile 300 boyuta indirildi, eğitim tahmin edilenin iki katı sürdü. |
+  | 5 (Cum) | Dört klasik model karşılaştırıldı, LightGBM en zayıf ikinci model çıktı | RandomizedSearchCV araması, sonuçların tabloya dökülmesi, Sprint Review hazırlığı | 🚧 Arama ~15 dk sürdü ve elle seçilen parametrelerin gerisinde kaldı — Review'a gündem olarak taşındı. |
+
+  **Katılım durumu:** Sprint boyunca `#takim-sentio-daily` kanalına 5/5 gün mesaj bırakan tek üye Kubilay Demirsoy olmuştur. Diğer üyelerden Daily Scrum yanıtı alınamamış, 2. ve 4. günlerde kanal üzerinden hatırlatma yapılmış, dönüş sağlanmamıştır.
 
   **Katılım durumu:** Sprint boyunca `#takim-sentio-daily` kanalına 10/10 gün mesaj bırakan tek üye Kubilay Demirsoy olmuştur. Diğer üyelerden Daily Scrum yanıtı alınamamış, 3. günde ve 7. günde kanal üzerinden hatırlatma yapılmış, dönüş sağlanmamıştır.
 
