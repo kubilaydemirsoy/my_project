@@ -1,113 +1,219 @@
-# my_project — Tweet Duygu Analizi
+# **Takım İsmi**
 
-18 bin İngilizce tweet üzerinde pozitif/negatif sınıflandırması. Önce klasik NLP boru hattını
-kurdum (temizlik → TF-IDF → doğrusal model), sonra aynı veriyle bir transformer'ı ince ayar
-yapıp ikisini yan yana koydum. Merak ettiğim şey sadece skor değildi: kelime torbası nerede
-tıkanıyor, transformer o farkı gerçekten kapatıyor mu, kapatıyorsa ne kadar?
+Takım Sentio
 
-Kısa cevap: kapatıyor, ~6 puan F1 farkla. Ama klasik model 470 KB, transformer 500 MB — ve
-klasik modelin eğitimi saniyeler sürüyor.
+# Ürün İle İlgili Bilgiler
 
-## Veri
+## Takım Elemanları
 
-`tweet_data.csv` — 18.727 satır, sütunlar: `textID`, `tweet_text`, `sentiment`.
-Etiketler `positive` / `negative`, dağılım %52.6 – %47.4. Ciddi bir dengesizlik yok,
-o yüzden accuracy anlamlı; yine de F1 ve ROC-AUC da raporluyorum.
-
-Veri ilk bakışta temiz görünüyor ama içinde **112 tam tekrar eden tweet** vardı. Bunları
-atmazsanız aynı metin hem eğitime hem teste düşebiliyor ve skor haksız yere şişiyor.
-Temizlik sonrası 18.615 kayıt kaldı.
-
-Ayrım: %70 eğitim (13.448) / %15 doğrulama (2.374) / %15 test (2.793), `stratify` ile.
-Model seçimi ve hiperparametre ayarı doğrulama kümesinde yapıldı, teste sadece en sonda
-bir kez bakıldı.
-
-## Sonuçlar
-
-Doğrulama kümesi:
-
-| Model | Accuracy | F1 | ROC-AUC |
+| Ad Soyad | Rol | Slack | Durum |
 |---|---|---|---|
-| LR + poz/neg frekans (2 boyut) | 0.789 | 0.793 | 0.859 |
-| LightGBM + TF-IDF (SVD 300) | 0.868 | 0.875 | 0.942 |
-| ComplementNB + TF-IDF | 0.884 | 0.887 | 0.949 |
-| LR (RandomizedSearchCV ile ayarlanmış) | 0.901 | 0.906 | 0.966 |
-| LinearSVC + TF-IDF | 0.905 | 0.910 | 0.968 |
-| LR + TF-IDF (kelime+karakter) | 0.907 | 0.911 | 0.968 |
-| **LR + Bag-of-Words** | **0.907** | **0.912** | 0.963 |
-| RoBERTa (hazır, hiç eğitilmemiş) | 0.921 | 0.926 | 0.971 |
-| **RoBERTa (fine-tuned)** | **0.954** | **0.957** | **0.988** |
+| KUBILAY DEMIRSOY | Scrum Master / Developer | `kdemirsoy1970` (U0A39LSDNQ5) | Aktif |
+| MUHAMMED YUSUF YÜRTMEN | Product Owner | `muhammetyusuf.1343` (U0A3GMH91B6) | Pasif |
+| SENANUR DEMIRCI | Team Member / Developer | `senanurdemirci9b` (U0A39M0HYBF) | Pasif |
+| MEHMET CAN GÜLSEROĞLU | Team Member / Developer | `mcagul99` (U0A3B384YVC) | Pasif |
+| ZEHRA CEREN ENGIN | Team Member / Developer | `zcerenengin` (U0A3B33DC6A) | Pasif |
 
-Test kümesi (tek seferlik final ölçüm):
+> **Not:** Sprint 2 boyunca takımın aktif katılım gösteren tek üyesi Kubilay Demirsoy olmuştur. Diğer üyeler Daily Scrum kanalına düzenli katılım sağlamamış, atanan task'ler devralınmamıştır. Bu durum Sprint Retrospective'de kayıt altına alınmış ve eğitim koordinasyonuna bildirilmiştir. Sprint hedefleri, kapsam daraltılmadan tek geliştirici tarafından tamamlanmıştır.
 
-| Model | Accuracy | F1 | ROC-AUC |
-|---|---|---|---|
-| LR + Bag-of-Words | 0.888 | 0.892 | 0.957 |
-| RoBERTa (fine-tuned) | 0.947 | 0.950 | 0.984 |
+## Ürün İsmi
 
-Fine-tuning Colab T4'te 2 epoch, yaklaşık 2 dakika sürdü (early stopping 3. epoch'a
-gerek bırakmadı, eğitim kaybı 0.165).
+--Tweet Duygu Analizi (Sentiment Analysis)--
 
-## Not ettiğim şeyler
+## Ürün Açıklaması
 
-**Hiperparametre araması işe yaramadı.** 25 aday, 5 katlı CV — ve çıkan model elle seçtiğim
-varsayılanlardan yarım puan *geride* kaldı (0.906 vs 0.912). CV skorunu optimize etmek her
-zaman doğrulama skorunu iyileştirmiyor; arama uzayının dışında kalan `min_df` / n-gram
-kombinasyonları daha iyiymiş. Negatif sonuç ama bence raporlanması gereken bir sonuç.
+- Sosyal medya paylaşımlarının duygu tonunu (pozitif / negatif) otomatik olarak sınıflandıran bir makine öğrenmesi modeli geliştiriyoruz. Ürün, 18.727 etiketli tweet üzerinde eğitiliyor ve iki farklı yaklaşımı karşılaştırıyor: klasik NLP boru hattı (TF-IDF + doğrusal model) ve transformer tabanlı derin öğrenme. Marka takibi, müşteri geri bildirimi analizi ve kriz yönetimi gibi senaryolarda kullanılabilir.
 
-**Boosting metinde çalışmıyor.** LightGBM'i "acaba" diye denedim, en zayıf ikinci model çıktı.
-Yüksek boyutlu seyrek matrisi SVD ile 300 boyuta indirmek bilgi kaybettiriyor; doğrusal
-modeller seyrekliği doğrudan kullanabildiği için avantajlı. Ağaç modelleri sayısal/tablosal
-özelliklerin de olduğu problemlerde parlıyor, saf metinde değil.
+## Ürün Özellikleri
 
-**Karakter n-gramları beklediğim kadar katkı yapmadı.** TF-IDF'e `char_wb` (3,5) eklemek
-AUC'yi 0.963'ten 0.968'e çıkardı ama accuracy'de fark yok. Twitter'ın yazım hatası
-bolluğunda daha fazlasını umuyordum.
+- Tweet metnini otomatik temizleme (RT etiketi, @kullanıcı, URL, hashtag, emoji, harf uzatma, kısaltmalar)
+- Olumsuzluk işaretleme — "not good" ile "good" ayrımını koruyan `NOT_` önek mekanizması
+- Hafif ve hızlı klasik model (470 KB, milisaniyede tahmin)
+- Tahminle birlikte güven skoru (`p_positive`) döndürme
+- Model karşılaştırma paneli: accuracy, F1, ROC-AUC, karışıklık matrisi, ROC eğrisi
+- Modelin hangi kelimelere ağırlık verdiğini gösteren yorumlanabilirlik grafiği
+- Eğitilmiş modeli kaydetme ve tek satırlık `predict_sentiment()` fonksiyonu ile çıkarım
 
-**Hiç eğitilmemiş transformer, en iyi klasik modelimi geçti.** `cardiffnlp/twitter-roberta`
-tam da bu alanda (124M tweet) ön-eğitilmiş olduğu için tek bir gradyan adımı atmadan 0.926 F1
-veriyor. Alan uyumu, model büyüklüğünden daha önemli olabiliyor.
+## Hedef Kitle
 
-**Olumsuzluk işaretleme.** `not`, `no`, `never` gibi kelimeleri stopword listesinden çıkardım
-ve olumsuzluktan sonraki üç tokene `NOT_` öneki ekledim. Bu olmadan "not good" ile "good"
-aynı vektöre düşüyor — kelime torbasının en can sıkıcı zaafı.
+- Sosyal medya ve marka yöneticileri
+- Müşteri deneyimi (CX) ekipleri
+- Pazar araştırması yapan analistler
+- NLP alanında çalışan öğrenciler ve araştırmacılar
+- Veri bilimi alanına yeni giren geliştiriciler
 
-**Kalan hataların hepsi model hatası değil.** Klasik model test setinde 314 hata yapıyor
-(%11.2). En emin yanlışlara tek tek baktığımda önemli bir kısmı ya yanlış etiketlenmiş ya
-alaycı tweetler. Örneğin "Happy Mother's Day to every mommy out there" veri setinde negatif
-etiketli — model haklı, etiket yanlış. Bu veri setinde ~%95 muhtemelen gerçekçi bir tavan.
+---
 
-## Defterde ne var
+# Sprint 1
 
-`sentiment.ipynb` sırayla:
+[Sprint 1 içeriği doldurulacak]
 
-1. Veri keşfi — dağılımlar, tweet uzunlukları, tekrar/eksik kontrolü, kelime bulutları
-2. Normalizasyon — RT, @kullanıcı, URL, hashtag, emoji, harf uzatma, kısaltmalar, olumsuzluk
-3. Temsil — poz/neg frekans, Bag-of-Words, TF-IDF (kelime + karakter n-gram)
-4. Klasik modeller — LR, LinearSVC, ComplementNB, LightGBM + hiperparametre araması
-5. Transformer — hazır model ile tahmin, ardından fine-tuning
-6. Hata analizi — en emin yanlışlar, en ayırt edici özellikler
-7. Model kaydetme + `predict_sentiment()` çıkarım fonksiyonu
+---
 
-Çıktılar defterin içinde kayıtlı, tekrar çalıştırmadan da görebilirsiniz.
+# Sprint 2
 
-## Çalıştırma
+- **Sprint Notları**: Bu sprint'in hedefi, Sprint 1'de hazırlanan temiz veri üzerinde klasik makine öğrenmesi modellerini eğitip karşılaştırmak ve ürünün ilk çalışan sınıflandırıcısını ortaya çıkarmaktı. Üç farklı metin temsili (pozitif/negatif frekans vektörü, Bag-of-Words, TF-IDF) ve dört farklı sınıflandırıcı denendi. Değerlendirme kodunun her model için yeniden yazılmaması adına ortak bir `evaluate()` fonksiyonu geliştirildi.
 
-**Colab (önerilen — Bölüm 5 GPU ister):**
+- **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
 
-Defteri açın, `Çalışma zamanı > Türünü değiştir > T4 GPU` seçin, ilk hücreden başlayın.
-İkinci hücre `tweet_data.csv` için yükleme kutusu açar.
+- **Puan tamamlama mantığı**: Projenin toplamı 300 puan olarak belirlendi ve üç sprint'e eşit dağıtıldı. Sprint 2 için hedeflenen 100 puanın tamamı tamamlandı. Story başına verilen tahmin puanı, sprint toplamının yarısını geçmeyecek şekilde tutuldu; en büyük story olan "model eğitimi ve karşılaştırması" 40 puan olarak tahmin edildi.
 
-**Yerelde:**
+- **Daily Scrum**: Takım üyelerinin farklı şehirlerde ve farklı çalışma saatlerinde olması nedeniyle Daily Scrum toplantılarının **Slack üzerinden yazılı (asenkron)** yapılmasına karar verildi. `#takim-sentio-daily` kanalında her iş günü saat 10:00'a kadar üç soru yanıtlanıyor: *dün ne yaptım, bugün ne yapacağım, önümde bir engel var mı*. Engel bildiren mesajlar 🚧 emojisi ile işaretleniyor.
+
+  Sprint 2 Daily Scrum kayıtları: [Sprint 2 Daily Scrum Chats](ProjectManagement/Sprint2Documents/DailyScrumMeetingNotesSprint2.docx)
+
+  Standart mesaj formatı:
+
+  ```
+  kdemirsoy1970  10:00
+  📅 Gün 5 — Daily Scrum
+
+  ✅ Dün: CountVectorizer ve TfidfVectorizer kurulumu tamamlandı,
+     ilk deneme eğitimleri alındı.
+  🎯 Bugün: Vektörleştiriciyi Pipeline içine taşıyacağım.
+  🚧 Engel: Vektörleştiriciyi tüm veriye fit ettiğimi fark ettim —
+     test bilgisi eğitime sızıyor. Skorlar bu yüzden iyimser çıkmış
+     olabilir. Pipeline'a geçip dünkü sonuçları yeniden ölçeceğim.
+  ```
+
+  <details>
+  <summary><b>Sprint 2 Daily Scrum özeti — 10 iş günü</b> (açmak için tıklayın)</summary>
+
+  | Gün | Dün ne yapıldı | Bugün ne yapılacak | Engel |
+  |---|---|---|---|
+  | 1 | Sprint 1 kapanışı | Sprint planlama, story'lerin task'lere bölünmesi, metin temsili yöntemlerinin araştırılması | — |
+  | 2 | Sprint planlama tamamlandı | `build_freqs()` ve `tweet_to_freq()` fonksiyonlarının yazılması | — |
+  | 3 | Frekans sözlüğü çıkarıldı (17.919 kelime-sınıf çifti) | Baseline modelin eğitilmesi | — |
+  | 4 | Baseline eğitildi, 0.789 accuracy | Ortak `evaluate()` fonksiyonunun yazılması | 🚧 Baseline beklenenden düşük çıktı. İki özelliğe sıkıştırılmış temsilden fazlası beklenmemeli sonucuna varıldı, referans olarak kabul edildi. |
+  | 5 | `evaluate()` tamamlandı | CountVectorizer / TfidfVectorizer kurulumu | 🚧 Vektörleştirici tüm veriye fit ediliyordu — veri sızıntısı tespit edildi. |
+  | 6 | Sızıntı `Pipeline` ile giderildi, sonuçlar yeniden ölçüldü | LR + BoW ve LR + TF-IDF eğitimi, karakter n-gram eklenmesi | — |
+  | 7 | İki model de ~0.907 accuracy verdi | LinearSVC ve ComplementNB eklenmesi | 🚧 LinearSVC `predict_proba` desteklemiyor, ROC-AUC hesaplanamıyor. `CalibratedClassifierCV` ile sarmalanarak çözüldü. |
+  | 8 | Dört klasik model karşılaştırıldı | LightGBM entegrasyonu | 🚧 Seyrek matris ağaç modeline uygun değil; TruncatedSVD ile 300 boyuta indirildi. Eğitim tahmin edilenin iki katı sürdü. |
+  | 9 | LightGBM sonuçlandı, en zayıf ikinci model | RandomizedSearchCV ile hiperparametre araması | 🚧 Arama ~15 dk sürdü, Colab oturumunun düşmemesi için gözlem altında tutuldu. |
+  | 10 | Arama tamamlandı | Sonuçların tabloya dökülmesi, Sprint Review hazırlığı | 🚧 Aramanın elle seçilen parametrelerin gerisinde kalması — Review'a gündem olarak taşındı. |
+
+  **Katılım durumu:** Sprint boyunca `#takim-sentio-daily` kanalına 10/10 gün mesaj bırakan tek üye Kubilay Demirsoy olmuştur. Diğer üyelerden Daily Scrum yanıtı alınamamış, 3. günde ve 7. günde kanal üzerinden hatırlatma yapılmış, dönüş sağlanmamıştır.
+
+  </details>
+
+- **Sprint board update**: Bu sprint'te takip, Miro yerine **GitHub Issues + Projects** üzerinden yürütüldü. Story'ler issue, task'ler ise issue içindeki checklist maddeleri olarak tanımlandı. Sprint sonunda tüm issue'lar `Done` sütununa taşındı.
+
+- **Ürün Durumu**:
+
+  Sprint sonunda çalışan bir duygu sınıflandırıcısı elde edildi. Sonuçların tamamı **doğrulama kümesi** (2.374 tweet) üzerindedir; test kümesine bu sprint'te dokunulmadı.
+
+  | Model | Accuracy | F1 | ROC-AUC |
+  |---|---|---|---|
+  | LR + poz/neg frekans (2 boyut) | 0.789 | 0.793 | 0.859 |
+  | LightGBM + TF-IDF (SVD 300) | 0.868 | 0.875 | 0.942 |
+  | ComplementNB + TF-IDF | 0.884 | 0.887 | 0.949 |
+  | LR (RandomizedSearchCV ile ayarlanmış) | 0.901 | 0.906 | 0.966 |
+  | LinearSVC + TF-IDF | 0.905 | 0.910 | 0.968 |
+  | LR + TF-IDF (kelime + karakter n-gram) | 0.907 | 0.911 | 0.968 |
+  | **LR + Bag-of-Words** | **0.907** | **0.912** | 0.963 |
+
+  ### 1. Sınıf ayrımının veri düzeyinde doğrulanması
+
+  Modeli eğitmeden önce, kelimelerin sınıflara göre dağılımına bakarak öğrenilecek bir sinyal olup olmadığı kontrol edildi:
+
+  ```
+  Sözlük büyüklüğü (kelime, sınıf) çifti: 17919
+  'love' pozitifte: 844 | negatifte: 35
+  ```
+
+  ![En pozitif ve en negatif kelimeler](ProjectManagement/Sprint2Documents/log_oran_kelimeler.jpeg)
+
+  Log-oran sıralaması beklendiği gibi çıktı: pozitif tarafta *awesome, happy, amaze, welcome, thanks*; negatif tarafta *sad, hate, suck, hurt, bore*. Veri setinin tutarlı etiketlendiğinin ilk göstergesi oldu.
+
+  ### 2. Baseline — LR + poz/neg frekans (2 boyutlu temsil)
+
+  ![Baseline karışıklık matrisi ve ROC](ProjectManagement/Sprint2Documents/baseline_confusion_roc.jpeg)
+
+  Tüm tweet'i iki sayıya sıkıştıran temsil, 2.374 örnekte **502 hata** yaptı (215 yanlış pozitif, 287 yanlış negatif). AUC 0.86. Sonraki modellerin karşılaştırılacağı referans noktası olarak kaydedildi.
+
+  ### 3. Sprint'in ana çıktısı — LR + TF-IDF
+
+  ![LR TF-IDF karışıklık matrisi ve ROC](ProjectManagement/Sprint2Documents/lr_tfidf_confusion_roc.jpeg)
+
+  Aynı doğrulama kümesinde hata sayısı **502'den 221'e** düştü (107 yanlış pozitif, 114 yanlış negatif). AUC 0.86'dan 0.97'ye çıktı. Hataların iki sınıf arasında dengeli dağılması, modelin bir sınıfa eğilim göstermediğini doğruladı.
+
+  En iyi modelin (LR + Bag-of-Words) detaylı sınıflandırma raporu:
+
+  ```
+  === LR + BoW [val] ===
+  Accuracy: 0.9073 | F1: 0.9117 | ROC-AUC: 0.9631
+
+                precision    recall  f1-score   support
+
+      negative      0.899     0.906     0.902      1124
+      positive      0.915     0.909     0.912      1250
+
+      accuracy                          0.907      2374
+     macro avg      0.907     0.907     0.907      2374
+  weighted avg      0.907     0.907     0.907      2374
+  ```
+
+  ### 4. Hiperparametre araması
+
+  ```
+  Fitting 5 folds for each of 25 candidates, totalling 125 fits
+  En iyi CV F1: 0.8919
+  En iyi parametreler: {'clf__C': 21.52, 'clf__class_weight': None,
+                        'vec__max_df': 0.9, 'vec__min_df': 1,
+                        'vec__ngram_range': (1, 2)}
+  ```
+
+  ### 5. Model yorumlanabilirliği
+
+  ![En ayırt edici özellikler](ProjectManagement/Sprint2Documents/en_ayirt_edici_ozellikler.jpeg)
+
+  Sınıflandırıcının en yüksek ağırlık verdiği kelimeler, 1. adımdaki veri düzeyi analiziyle büyük ölçüde örtüştü. Bu, modelin veriye ezber yapmak yerine anlamlı bir sinyal öğrendiğini gösteriyor. Ürünün "kara kutu değil, açıklanabilir" özelliği bu çıktıyla karşılandı.
+
+- **Sprint Review**:
+
+  Sprint hedefine ulaşıldı; çalışan ve ~%91 doğrulukla tahmin yapan bir model ortaya çıktı. Toplantıda öne çıkan konular:
+
+  - **Hiperparametre araması beklenenin tersi sonuç verdi.** 25 aday ve 125 eğitimlik arama, elle seçilen varsayılan parametrelerin *gerisinde* kaldı (F1 0.906 vs 0.912). Sebep, arama uzayına karakter n-gram ve Bag-of-Words seçeneklerinin dahil edilmemesiydi. Bu negatif sonucun gizlenmemesine, README'de olduğu gibi raporlanmasına karar verildi.
+  - **LightGBM metin verisinde beklendiği gibi zayıf kaldı.** Yüksek boyutlu seyrek matrisi SVD ile 300 boyuta indirmek bilgi kaybettiriyor; doğrusal modeller seyrekliği doğrudan kullanabildiği için avantajlı. Ağaç tabanlı modellerin bu problem için uygun olmadığı sonucuna varıldı.
+  - **Karakter n-gramlarının katkısı sınırlı çıktı.** ROC-AUC'yi 0.963'ten 0.968'e taşıdı ama accuracy'de fark yaratmadı. Twitter'ın yazım hatası bolluğu düşünüldüğünde daha fazlası bekleniyordu.
+  - **Klasik yaklaşımın tavanı görüldü.** Dört farklı model ve bir hiperparametre araması sonrasında sonuçlar 0.90–0.91 bandında sıkıştı. Sprint 3'te transformer tabanlı bir modelin denenmesine karar verildi.
+  - Vektörleştiricinin `Pipeline` içine alınarak veri sızıntısının önlenmesi, sprint'in en kritik teknik kararı olarak kaydedildi.
+
+  Sprint Review katılımcıları: Kubilay Demirsoy
+
+- **Sprint Retrospective**:
+
+  * **Takım katılımı sprint'in en büyük riski oldu.** Beş kişilik takımın dört üyesi Daily Scrum'a ve task devralmaya katılmadı. Sprint hedefi tek geliştirici tarafından tamamlandı ancak bu sürdürülebilir değil. Durum eğitim koordinasyonuna bildirildi; Sprint 3 planlaması, tek kişilik efora göre kapsam belirlenerek yapılacak.
+  * Ortak `evaluate()` fonksiyonunun erken yazılması çok zaman kazandırdı. Benzer yardımcı fonksiyonların ilerideki sprintlerde de en başta yazılmasına karar verildi.
+  * Hiperparametre araması için harcanan ~15 dakikalık hesaplama süresi çıktısına değmedi. Arama uzayı, sezgisel denemelerle iyi sonuç veren yapılandırmaları da kapsayacak şekilde tasarlanmalı.
+  * Model seçiminin yalnızca doğrulama kümesinde yapılması ve test kümesine dokunulmaması disiplinine sprint boyunca uyuldu. Bu kuralın Sprint 3'te de korunmasına karar verildi.
+  * Engel bildiren mesajların 🚧 emojisi ile işaretlenmesi işe yaradı, geçmişe dönük takip kolaylaştı.
+  * Task tahminleri genel olarak tuttu; yalnızca LightGBM entegrasyonu tahmin edilenin iki katı sürdü.
+
+---
+
+# Sprint 3
+
+[Sprint 3 içeriği doldurulacak]
+
+---
+
+## Kurulum ve Çalıştırma
+
+**Google Colab (önerilen):**
+
+`sentiment.ipynb` dosyasını Colab'da açın, `Çalışma zamanı > Türünü değiştir > T4 GPU` seçin ve ilk hücreden başlayın. İkinci hücre `tweet_data.csv` için yükleme kutusu açacaktır.
+
+**Yerel kurulum:**
 
 ```bash
-git clone https://github.com/<kullanıcı-adınız>/my_project.git
+git clone https://github.com/[kullanıcı-adınız]/my_project.git
 cd my_project
 pip install -r requirements.txt
 jupyter notebook sentiment.ipynb
 ```
 
-Kayıtlı modeli doğrudan kullanmak isterseniz:
+**Kayıtlı modeli doğrudan kullanma:**
 
 ```python
 import joblib
@@ -115,26 +221,20 @@ pipe = joblib.load("sentiment_classic.joblib")
 pipe.predict_proba(["what a wonderful day"])[0, 1]   # -> 0.99
 ```
 
-Dikkat: `sentiment_classic.joblib` scikit-learn 1.9.0 ile kaydedildi. Farklı bir sürümle
-yüklerseniz uyarı alırsınız; `requirements.txt`'teki sürümlerle sorun çıkmaz.
-
-## Sonraki adımlar
-
-- Karar eşiğini 0.5'te bırakmak yerine doğrulama kümesinde F1'i maksimize edecek şekilde seçmek
-- Klasik model + transformer olasılıklarını harmanlamak (basit soft-voting)
-- Nötr sınıfını ekleyip üç sınıflı hale getirmek
-- En emin yanlışları elle gözden geçirip etiket gürültüsünü temizlemek, sonra yeniden eğitmek
-
-## Dosyalar
+## Proje Yapısı
 
 ```
-sentiment.ipynb            # ana defter (çıktılarıyla)
+sentiment.ipynb            # ana defter (tüm çıktılarıyla birlikte)
 sentiment_classic.joblib   # eğitilmiş LR + BoW modeli (470 KB)
-tweet_data.csv             # veri (1.8 MB)
+tweet_data.csv             # veri seti (1.8 MB)
 requirements.txt
 .gitignore
 README.md
+ProjectManagement/
+  └── Sprint2Documents/
+        ├── DailyScrumMeetingNotesSprint2.docx
+        ├── log_oran_kelimeler.jpeg
+        ├── baseline_confusion_roc.jpeg
+        ├── lr_tfidf_confusion_roc.jpeg
+        └── en_ayirt_edici_ozellikler.jpeg
 ```
-
-Fine-tune edilmiş RoBERTa modeli (~500 MB) repoda yok — `.gitignore` ile dışarıda tutuldu.
-Defterin 5. bölümünü çalıştırırsanız kendiniz üretebilirsiniz.
