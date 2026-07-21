@@ -115,7 +115,8 @@ Takım Sentio
 
   ### 3. Sprint'in ana çıktısı — LR + TF-IDF
 
-  ![LR TF-IDF karışıklık matrisi ve ROC](ProjectManagement/Sprint2Documents/lr_tfidf_confusion_roc.jpeg)
+  <img width="903" height="384" alt="LR + TF-IDF" src="https://github.com/user-attachments/assets/ffed4668-d814-4aaf-afc8-fa01c64dc9e7" />
+
 
   Aynı doğrulama kümesinde hata sayısı **502'den 221'e** düştü (107 yanlış pozitif, 114 yanlış negatif). AUC 0.86'dan 0.97'ye çıktı. Hataların iki sınıf arasında dengeli dağılması, modelin bir sınıfa eğilim göstermediğini doğruladı.
 
