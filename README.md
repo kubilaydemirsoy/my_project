@@ -15,6 +15,7 @@ Takım Sentio
 | ZEHRA CEREN ENGIN | Team Member / Developer | `zcerenengin` (U0A3B33DC6A) | Pasif |
 
 
+
 ## Ürün İsmi
 
 --Tweet Duygu Analizi (Sentiment Analysis)--
@@ -56,7 +57,10 @@ Takım Sentio
   ```
 
   <details>
-  <summary><b>Sprint 2 Daily Scrum özeti — 10 iş günü</b> (açmak için tıklayın)</summary>
+  <summary><b>Sprint 2 Daily Scrum özeti </b> (açmak için tıklayın)</summary>
+
+  <img width="2322" height="1626" alt="sprint2_board" src="https://github.com/user-attachments/assets/5dc8449c-4cd4-4715-8f2e-c3c1c3504b7d" />
+
 
   | Gün | Dün ne yapıldı | Bugün ne yapılacak | Engel |
   |---|---|---|---|
@@ -148,7 +152,8 @@ Takım Sentio
 
   ### 5. Model yorumlanabilirliği
 
-  ![En ayırt edici özellikler](ProjectManagement/Sprint2Documents/en_ayirt_edici_ozellikler.jpeg)
+  <img width="683" height="784" alt="En ayırt edici özellikler" src="https://github.com/user-attachments/assets/06483d4e-ae51-4cb6-a951-d4838a6abddd" />
+
 
   Sınıflandırıcının en yüksek ağırlık verdiği kelimeler, 1. adımdaki veri düzeyi analiziyle büyük ölçüde örtüştü. Bu, modelin veriye ezber yapmak yerine anlamlı bir sinyal öğrendiğini gösteriyor. Ürünün "kara kutu değil, açıklanabilir" özelliği bu çıktıyla karşılandı.
 
@@ -204,18 +209,6 @@ pipe = joblib.load("sentiment_classic.joblib")
 pipe.predict_proba(["what a wonderful day"])[0, 1]   # -> 0.99
 ```
 
-## Proje Yapısı
-
-```
-sentiment.ipynb            # ana defter (tüm çıktılarıyla birlikte)
-sentiment_classic.joblib   # eğitilmiş LR + BoW modeli (470 KB)
-tweet_data.csv             # veri seti (1.8 MB)
-requirements.txt
-.gitignore
-README.md
-ProjectManagement/
-  └── Sprint2Documents/
-        ├── DailyScrumMeetingNotesSprint2.docx
         ├── log_oran_kelimeler.jpeg
         ├── baseline_confusion_roc.jpeg
         ├── lr_tfidf_confusion_roc.jpeg
