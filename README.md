@@ -42,27 +42,7 @@ Takım Sentio
 - NLP alanında çalışan öğrenciler ve araştırmacılar
 - Veri bilimi alanına yeni giren geliştiriciler
 
----
-
-# Sprint 1
-
-[Sprint 1 içeriği doldurulacak]
-
----
-
 # Sprint 2
-
-- **Sprint Notları**: Bu sprint'in hedefi, Sprint 1'de hazırlanan temiz veri üzerinde klasik makine öğrenmesi modellerini eğitip karşılaştırmak ve ürünün ilk çalışan sınıflandırıcısını ortaya çıkarmaktı. Üç farklı metin temsili (pozitif/negatif frekans vektörü, Bag-of-Words, TF-IDF) ve dört farklı sınıflandırıcı denendi. Değerlendirme kodunun her model için yeniden yazılmaması adına ortak bir `evaluate()` fonksiyonu geliştirildi.
-
-- **Sprint içinde tamamlanması tahmin edilen puan**: 100 Puan
-
-- **Puan tamamlama mantığı**: Projenin toplamı 300 puan olarak belirlendi ve üç sprint'e eşit dağıtıldı. Sprint 2 için hedeflenen 100 puanın tamamı tamamlandı. Story başına verilen tahmin puanı, sprint toplamının yarısını geçmeyecek şekilde tutuldu; en büyük story olan "model eğitimi ve karşılaştırması" 40 puan olarak tahmin edildi.
-
-- **Daily Scrum**: Takım üyelerinin farklı şehirlerde ve farklı çalışma saatlerinde olması nedeniyle Daily Scrum toplantılarının **Slack üzerinden yazılı (asenkron)** yapılmasına karar verildi. `#takim-sentio-daily` kanalında her iş günü saat 10:00'a kadar üç soru yanıtlanıyor: *dün ne yaptım, bugün ne yapacağım, önümde bir engel var mı*. Engel bildiren mesajlar 🚧 emojisi ile işaretleniyor.
-
-  Sprint 2 Daily Scrum kayıtları: [Sprint 2 Daily Scrum Chats](ProjectManagement/Sprint2Documents/DailyScrumMeetingNotesSprint2.docx)
-
-  Standart mesaj formatı:
 
   ```
   kdemirsoy1970  10:00
