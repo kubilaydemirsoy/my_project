@@ -183,3 +183,7 @@ Takım Sentio
 **Daily Scrum:** Sprint 2'deki düzen korundu — #takim-sentio-daily Slack kanalında her iş günü saat 10:00'a kadar yazılı (asenkron) üç soru, engeller 🚧 emojisi ile işaretleniyor. Sprint 3 Daily Scrum kayıtları: Sprint 3 Daily Scrum Chats <details> <summary><b>Sprint 3 Daily Scrum özeti — 1 hafta / 5 iş günü</b> (açmak için tıklayın)</summary>
 
 <img width="2576" height="1780" alt="sprint3_board" src="https://github.com/user-attachments/assets/89cbafbf-35eb-4e26-9a88-000ec51acb03" />
+
+Katılım durumu: Sprint 2'deki durum sürdü; #takim-sentio-daily kanalına 5/5 gün mesaj bırakan tek üye Kubilay Demirsoy oldu. Diğer üyelerden dönüş alınamadı. </details>
+Sprint board update: Board yapısı korundu (Rejected / Backlog / To Do / In progress / Done). Sprint 3'te To Do'ya alınan "transformer araştırması" ve "hata analizi" kartları ile yeni eklenen "RoBERTa fine-tuning", "Gradio arayüzü" ve "model kaydetme" kartlarının tamamı sprint sonunda Done sütununa taşındı.
+
