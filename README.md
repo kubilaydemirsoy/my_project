@@ -180,23 +180,12 @@ Takım Sentio
 # Sprint 3
 
 **Sprint Notları:** Sprint süresi 1 hafta (5 iş günü) olarak belirlendi. Bu sprint'in iki hedefi vardı: (1) Sprint 2'de tavanına ulaşılan klasik yaklaşımın ötesine geçmek için transformer tabanlı bir model denemek, (2) eğitilen modeli teknik bilgisi olmayan bir kullanıcının da kullanabileceği canlı bir web arayüzüne dönüştürerek ürünü tamamlamak. Böylece proje, bir Jupyter defterinden gerçek bir demo ürüne evrildi.
-**Daily Scrum:** Sprint 2'deki düzen korundu — #takim-sentio-daily Slack kanalında her iş günü saat 10:00'a kadar yazılı (asenkron) üç soru, engeller 🚧 emojisi ile işaretleniyor. Sprint 3 Daily Scrum kayıtları: Sprint 3 Daily Scrum Chats <details> <summary><b>Sprint 3 Daily Scrum özeti — 1 hafta / 5 iş günü</b> (açmak için tıklayın)</summary>
-
-<img width="2576" height="1780" alt="sprint3_board" src="https://github.com/user-attachments/assets/89cbafbf-35eb-4e26-9a88-000ec51acb03" />
+**Daily Scrum:** Sprint 2'deki düzen korundu — #takim-sentio-daily Slack kanalında her iş günü saat 10:00'a kadar yazılı (asenkron) üç soru, engeller 🚧 emojisi ile işaretleniyor. Sprint 3 Daily Scrum kayıtları: Sprint 3 Daily Scrum Chats 
 
 
-Ürün Durumu: Sprint sonunda proje, canlı bir demo arayüzüne sahip tam bir ürüne dönüştü. Transformer sonuçları hem doğrulama hem test kümesinde ölçüldü: Doğrulama kümesi:
-Model	Accuracy	F1	ROC-AUC
-RoBERTa (hazır, hiç eğitilmemiş)	0.921	0.926	0.971
-RoBERTa (fine-tuned)	0.954	0.957	0.988
-Test kümesi (tek seferlik final ölçüm):
-Model	Accuracy	F1	ROC-AUC
-LR + Bag-of-Words (Sprint 2 en iyisi)	0.888	0.892	0.957
-RoBERTa (fine-tuned)	0.955	0.957	0.986
-Fine-tuning Colab T4 üzerinde 3 epoch, ~3,5 dakika (202 sn) sürdü. Canlı demo arayüzü (Gradio): Kullanıcı bir metin yazıyor, model saniyeler içinde duygu tahmini ve güven skoru döndürüyor. Arayüz varsayılan olarak hafif klasik modeli kullanıyor; RoBERTa yüklüyse açılır menüden seçilebiliyor.
-<img width="1887" height="652" alt="image" src="https://github.com/user-attachments/assets/51869965-85f1-48a2-aea1-c4169d1cc99f" />
 
 
-Katılım durumu: Sprint 2'deki durum sürdü; #takim-sentio-daily kanalına 5/5 gün mesaj bırakan tek üye Kubilay Demirsoy oldu. Diğer üyelerden dönüş alınamadı. </details>
+Katılım durumu: Sprint 2'deki durum sürdü; #takim-sentio-daily kanalına 5/5 gün mesaj bırakan tek üye Kubilay Demirsoy oldu. Diğer üyelerden dönüş alınamadı.
 Sprint board update: Board yapısı korundu (Rejected / Backlog / To Do / In progress / Done). Sprint 3'te To Do'ya alınan "transformer araştırması" ve "hata analizi" kartları ile yeni eklenen "RoBERTa fine-tuning", "Gradio arayüzü" ve "model kaydetme" kartlarının tamamı sprint sonunda Done sütununa taşındı.
 
+<img width="2576" height="1780" alt="sprint3_board" src="https://github.com/user-attachments/assets/89cbafbf-35eb-4e26-9a88-000ec51acb03" />
