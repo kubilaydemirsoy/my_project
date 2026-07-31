@@ -179,35 +179,5 @@ Takım Sentio
 
 # Sprint 3
 
-[Sprint 3 içeriği doldurulacak]
-
----
-
-## Kurulum ve Çalıştırma
-
-**Google Colab (önerilen):**
-
-`sentiment.ipynb` dosyasını Colab'da açın, `Çalışma zamanı > Türünü değiştir > T4 GPU` seçin ve ilk hücreden başlayın. İkinci hücre `tweet_data.csv` için yükleme kutusu açacaktır.
-
-**Yerel kurulum:**
-
-```bash
-git clone https://github.com/[kullanıcı-adınız]/my_project.git
-cd my_project
-pip install -r requirements.txt
-jupyter notebook sentiment.ipynb
-```
-
-**Kayıtlı modeli doğrudan kullanma:**
-
-```python
-import joblib
-pipe = joblib.load("sentiment_classic.joblib")
-pipe.predict_proba(["what a wonderful day"])[0, 1]   # -> 0.99
-```
-
-        ├── log_oran_kelimeler.jpeg
-        ├── baseline_confusion_roc.jpeg
-        ├── lr_tfidf_confusion_roc.jpeg
-        └── en_ayirt_edici_ozellikler.jpeg
-```
+**Sprint Notları:** Sprint süresi 1 hafta (5 iş günü) olarak belirlendi. Bu sprint'in iki hedefi vardı: (1) Sprint 2'de tavanına ulaşılan klasik yaklaşımın ötesine geçmek için transformer tabanlı bir model denemek, (2) eğitilen modeli teknik bilgisi olmayan bir kullanıcının da kullanabileceği canlı bir web arayüzüne dönüştürerek ürünü tamamlamak. Böylece proje, bir Jupyter defterinden gerçek bir demo ürüne evrildi.
+**Daily Scrum:** Sprint 2'deki düzen korundu — #takim-sentio-daily Slack kanalında her iş günü saat 10:00'a kadar yazılı (asenkron) üç soru, engeller 🚧 emojisi ile işaretleniyor. Sprint 3 Daily Scrum kayıtları: Sprint 3 Daily Scrum Chats <details> <summary><b>Sprint 3 Daily Scrum özeti — 1 hafta / 5 iş günü</b> (açmak için tıklayın)</summary>
