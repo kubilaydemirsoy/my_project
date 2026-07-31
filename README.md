@@ -181,3 +181,5 @@ Takım Sentio
 
 **Sprint Notları:** Sprint süresi 1 hafta (5 iş günü) olarak belirlendi. Bu sprint'in iki hedefi vardı: (1) Sprint 2'de tavanına ulaşılan klasik yaklaşımın ötesine geçmek için transformer tabanlı bir model denemek, (2) eğitilen modeli teknik bilgisi olmayan bir kullanıcının da kullanabileceği canlı bir web arayüzüne dönüştürerek ürünü tamamlamak. Böylece proje, bir Jupyter defterinden gerçek bir demo ürüne evrildi.
 **Daily Scrum:** Sprint 2'deki düzen korundu — #takim-sentio-daily Slack kanalında her iş günü saat 10:00'a kadar yazılı (asenkron) üç soru, engeller 🚧 emojisi ile işaretleniyor. Sprint 3 Daily Scrum kayıtları: Sprint 3 Daily Scrum Chats <details> <summary><b>Sprint 3 Daily Scrum özeti — 1 hafta / 5 iş günü</b> (açmak için tıklayın)</summary>
+
+<img width="2576" height="1780" alt="sprint3_board" src="https://github.com/user-attachments/assets/89cbafbf-35eb-4e26-9a88-000ec51acb03" />
