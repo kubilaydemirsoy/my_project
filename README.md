@@ -189,3 +189,42 @@ Katılım durumu: Sprint 2'deki durum sürdü; #takim-sentio-daily kanalına 5/5
 Sprint board update: Board yapısı korundu (Rejected / Backlog / To Do / In progress / Done). Sprint 3'te To Do'ya alınan "transformer araştırması" ve "hata analizi" kartları ile yeni eklenen "RoBERTa fine-tuning", "Gradio arayüzü" ve "model kaydetme" kartlarının tamamı sprint sonunda Done sütununa taşındı.
 
 <img width="2576" height="1780" alt="sprint3_board" src="https://github.com/user-attachments/assets/89cbafbf-35eb-4e26-9a88-000ec51acb03" />
+
+Ürün Durumu: Sprint sonunda proje, canlı bir demo arayüzüne sahip tam bir ürüne dönüştü. Transformer sonuçları hem doğrulama hem test kümesinde ölçüldü: Doğrulama kümesi:
+<img width="371" height="99" alt="image" src="https://github.com/user-attachments/assets/41563e3f-9ec2-4e73-a620-128b22e9f807" />
+
+Test kümesi (tek seferlik final ölçüm):
+<img width="386" height="102" alt="image" src="https://github.com/user-attachments/assets/21b36ce5-b9b7-42aa-9551-1203903aaf51" />
+
+Fine-tuning Colab T4 üzerinde 3 epoch, ~3,5 dakika (202 sn) sürdü. Canlı demo arayüzü (Gradio): Kullanıcı bir metin yazıyor, model saniyeler içinde duygu tahmini ve güven skoru döndürüyor. Arayüz varsayılan olarak hafif klasik modeli kullanıyor; RoBERTa yüklüyse açılır menüden seçilebiliyor.
+
+<img width="1876" height="638" alt="image" src="https://github.com/user-attachments/assets/d6a8610a-29f7-45f7-9621-286826c281ae" />
+
+**Sprint Review:** Her iki sprint hedefine de ulaşıldı. 
+
+**Öne çıkan konular:**
+
+**Alan uyumu, model büyüklüğünden önemli çıktı.** Hiç eğitilmemiş cardiffnlp/twitter-roberta, Sprint 2'nin en iyi klasik modelini geçti (0.926 vs 0.912 F1). Model Twitter verisinde ön-eğitildiği için, genel amaçlı daha büyük bir modele göre bu göreve daha hazır geldi.
+
+**Fine-tuning farkı 6 puana çıkardı** ama bir bedeli var: klasik model 470 KB ve CPU'da milisaniyede çalışıyor, transformer 500 MB ve pratik hız için GPU istiyor. Bu yüzden arayüzün varsayılanı klasik model olarak bırakıldı; transformer opsiyonel seçenek olarak sunuldu. Ürün kararı olarak "hız mı, doğruluk mu" ikilemi kullanıcıya bırakıldı.
+
+**Hata analizi, kalan hataların bir kısmının etiket hatası olduğunu doğruladı.** Modelin en emin olduğu yanlışlar incelendiğinde, "Happy Mother's Day to every mommy out there" gibi açıkça pozitif metinlerin veri setinde negatif etiketli olduğu görüldü. Bu veri setinde ~%95 doğruluğun pratik bir tavan olduğu sonucuna varıldı.
+
+Ürünün Jupyter defterinden çıkıp Gradio arayüzüyle son kullanıcıya ulaşabilir hale gelmesi, projenin en somut çıktısı olarak kaydedildi.
+
+Sprint Review katılımcıları: Kubilay Demirsoy
+
+**Sprint Retrospective:**
+Sprint 2'de klasik yaklaşımın tavanının net görülmüş olması, Sprint 3'te doğrudan transformer'a geçme kararını kolaylaştırdı. Önceki sprint'in dürüst değerlendirmesi bu sprint'e zaman kazandırdı.
+Alan-uyumlu bir gövde seçmek (genel bert-base yerine twitter-roberta), tek başına en yüksek getirili karar oldu. İleriki projelerde model seçiminde "veriye en yakın ön-eğitim" ölçütü önceliklendirilecek.
+Sürüm uyumsuzlukları (Colab'ın değişken transformers sürümü) beklenmedik zaman kaybına yol açtı. Bağımlılık sürümlerinin requirements.txt'te sabitlenmesi kararı alındı.
+Takım katılımı sorunu üç sprint boyunca sürdü. Proje tek geliştiriciyle tamamlandı; durum kayıt altına alınıp eğitim koordinasyonuna iletildi.
+Model seçiminin doğrulamada yapılıp teste yalnızca bir kez bakılması disiplinine üç sprint boyunca uyuldu.
+
+**Kurulum ve Çalıştırma**
+
+**Google Colab (önerilen):**
+
+sentiment.ipynb dosyasını Colab'da açın, Çalışma zamanı > Türünü değiştir > T4 GPU seçin ve ilk hücreden başlayın. İkinci hücre tweet_data.csv için yükleme kutusu açacaktır.
+
+
